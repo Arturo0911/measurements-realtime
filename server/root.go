@@ -16,6 +16,6 @@ func Root() {
 	}
 
 	if err := serve.ListenAndServe(); err != nil && err != http.ErrServerClosed {
-		log.Fatal("listen: %s\n", err)
+		log.Fatalf("listen: %s\n", err)
 	}
 }
