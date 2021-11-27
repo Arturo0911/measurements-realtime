@@ -11,7 +11,7 @@ import (
 func DataBaseConnection() {
 	fmt.Println("[*] Starting the connection with database")
 
-	db, err := sql.Open("mysql", "root_payload:@tcp(127.0.0.1:3306)/TestArduinos")
+	db, err := sql.Open("mysql", "root_payload:@tcp(127.0.0.1:3306)/GreenHouse")
 	if err != nil {
 		log.Fatal(err)
 		return
