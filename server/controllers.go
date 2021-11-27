@@ -25,7 +25,7 @@ func GetMeasurements(c *gin.Context) {
 	})
 }
 
-func SendMeasurements(c *gin.Context) {
+func GetMeasurement(c *gin.Context) {
 	c.JSON(200, MeasurementsResponse{})
 }
 

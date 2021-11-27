@@ -3,9 +3,9 @@ package server
 import "github.com/gin-gonic/gin"
 
 func Router(router *gin.Engine) *gin.Engine {
-	router.Group("/").
-		GET("get-measure", GetMeasurements).
-		GET("send-measure", SendMeasurements).
+	router.Group("/realtime").
+		GET("get-measures", GetMeasurements).
+		GET("get-measure", GetMeasurement).
 		POST("post-measure", HandleVerification)
 		// possible POST method to send Mysql
 
