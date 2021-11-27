@@ -14,40 +14,30 @@ import (
 // Database credential is a configuration struct
 // for a database connection
 type DatabaseCredential struct {
-	DSN        string
-	DriverName string
-	Connector  func() (*sql.DB, error)
+	DSN          string
+	DriverName   string
+	DB           sql.DB
+	DatabaseName string
+	DBAddress    string
+	//Connector  func() (*sql.DB, error)
 }
 
-// DatabaseFactory contains all database
-// credentials and instances
-type DatabaseFactory struct {
-	credentials map[string]DatabaseCredential
-	instances   map[string]*DB
+var MysqlDB = &DatabaseCredential{}
+
+func NewInstance() *DatabaseCredential {
+	return &DatabaseCredential{
+		DSN:          "",
+		DriverName:   "mysql",
+		DatabaseName: "GreenHouse",
+	}
 }
 
-type DB struct {
-	*sqlx.DB
-}
-
-type IDBConnection interface {
-	Connect()
-}
-
-type MySQLConnection struct {
-	connectionString string
-}
-
-func DataBaseConnection() {
-	fmt.Println("[*] Starting the connection with database")
-
-	db, err := sql.Open("mysql", "root_payload:@tcp(127.0.0.1:3306)/GreenHouse")
-	if err != nil {
-		log.Fatal(err)
+func (db *DatabaseCredential) DatabaseConnection() {
+	dbConn, dbErr := sql.Open("mysql", fmt.Sprintf("root_payload:@tcp(127.0.0.1:3306)/%s", db.DatabaseName))
+	if dbErr != nil {
+		log.Fatalf("Error in the connection: %s", dbErr)
 		return
 	}
-
-	fmt.Println("[*] Connection Done!!")
-
-	defer db.Close()
+	MysqlDB.DB = *dbConn
+	defer dbConn.Close()
 }
