@@ -6,6 +6,7 @@ func Server(router *gin.Engine) *gin.Engine {
 	router.Group("/").
 		GET("get-measure", GetMeasurements).
 		GET("send-measure", SendMeasurements)
+		// possible POST method to send Mysql
 
 	router.Use(func(c *gin.Context) {
 		c.JSON(404, JsonResponse{
