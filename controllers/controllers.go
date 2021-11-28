@@ -1,15 +1,20 @@
-package server
+package controllers
 
 import (
 	"fmt"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
+	"gorm.io/gorm"
 )
 
 type JsonResponse struct {
 	Success bool
 	Error   string
+}
+
+type LevelsRepo struct {
+	Db *gorm.DB
 }
 
 type MeasurementsResponse struct {
