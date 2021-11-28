@@ -8,12 +8,8 @@ import (
 	"gorm.io/driver/mysql"
 )
 
-// Database credential is a configuration struct
-// for a database connection
-type DatabaseCredential struct {
-	DSN string
-	DB  gorm.DB
-}
+const DB_USERNAME = "root_payload"
+const DB_PASSWORD = ""
 
 func NewInstance() *gorm.DB {
 	return GetConnection()
@@ -21,7 +17,7 @@ func NewInstance() *gorm.DB {
 
 func GetConnection() *gorm.DB {
 	db, err := gorm.Open(
-		mysql.Open("root_payload:@tcp(127.0.0.1:3306)/GreenHouse?charset=utf8mb4&parseTime=True&loc=Local"),
+		mysql.Open(DB_USERNAME+":"+DB_PASSWORD+"@tcp(127.0.0.1:3306)/GreenHouse?parseTime=true&loc=Local"),
 		&gorm.Config{})
 	if err != nil {
 		log.Fatalf("Error by: %s", err)

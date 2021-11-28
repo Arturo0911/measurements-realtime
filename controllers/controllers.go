@@ -4,6 +4,8 @@ import (
 	"fmt"
 	"net/http"
 
+	"github.com/Arturo0911/measurements-realtime/connection"
+	"github.com/Arturo0911/measurements-realtime/models"
 	"github.com/gin-gonic/gin"
 	"gorm.io/gorm"
 )
@@ -28,14 +30,31 @@ type MeasurementsResponse struct {
 	DioxideMax     float64 `json:"dioxide_max_value"`
 }
 
-func GetMeasurements(c *gin.Context) {
-	c.JSON(200, MeasurementsResponse{
-		OxigenMin: 25.22,
-	})
+func New() *LevelsRepo {
+	db := connection.NewInstance()
+	db.AutoMigrate(&models.Levels{})
+	return &LevelsRepo{
+		Db: db,
+	}
 }
 
-func GetMeasurement(c *gin.Context) {
-	c.JSON(200, MeasurementsResponse{})
+// func GetMeasurements(c *gin.Context) {
+// 	c.JSON(200, MeasurementsResponse{
+// 		OxigenMin: 25.22,
+// 	})
+// }
+
+func (repository *LevelsRepo) GetMeasurements(c *gin.Context) {
+	var levels []models.Levels
+	err := models.GetLevels(repository.Db, &levels)
+	if err != nil {
+		c.AbortWithStatusJSON(http.StatusInternalServerError,
+			gin.H{
+				"error": err,
+			})
+		return
+	}
+	c.JSON(http.StatusOK, levels)
 }
 
 func HandleVerification(c *gin.Context) {

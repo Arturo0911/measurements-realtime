@@ -8,17 +8,17 @@ import (
 
 type Levels struct {
 	gorm.Model
-	IdLevels       int64
-	IdReaders      int64
-	DataWrite      time.Time
-	OxigenMin      float64
-	OxigenMax      float64
-	TemperatureMin float64
-	TemperatureMax float64
-	HumidityMin    float64
-	HumidityMax    float64
-	DioxideMin     float64
-	DioxideMax     float64
+	IdLevels       int64     `json:"id_levels"`
+	IdReaders      int64     `json:"id_readers"`
+	DataWrite      time.Time `json:"data_write"`
+	OxigenMin      float64   `json:"oxigen_min_value"`
+	OxigenMax      float64   `json:"oxigen_max_value"`
+	TemperatureMin float64   `json:"temperature_min_value"`
+	TemperatureMax float64   `json:"temperature_max_value"`
+	HumidityMin    float64   `json:"humidity_min_value"`
+	HumidityMax    float64   `json:"humidity_max_value"`
+	DioxideMin     float64   `json:"dioxide_min_value"`
+	DioxideMax     float64   `json:"dioxide_max_value"`
 }
 
 func CreateLevel(db *gorm.DB, levels *Levels) (err error) {
@@ -29,7 +29,7 @@ func CreateLevel(db *gorm.DB, levels *Levels) (err error) {
 	return nil
 }
 
-func GetLevels(db *gorm.DB, levels *Levels) (err error) {
+func GetLevels(db *gorm.DB, levels *[]Levels) (err error) {
 	err = db.Find(levels).Error
 	if err != nil {
 		return err
