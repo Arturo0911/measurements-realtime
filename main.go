@@ -1,11 +1,15 @@
 package main
 
 import (
-	. "github.com/Arturo0911/measurements-realtime/server"
-	//. "github.com/Arturo0911/measurements-realtime/connection"
+	"fmt"
+
+	. "github.com/Arturo0911/measurements-realtime/connection"
+	//. "github.com/Arturo0911/measurements-realtime/server"
 )
 
 func main() {
-	Serve()
+	//Serve()
+	fmt.Println("")
 	//DataBaseConnection()
+	Connection()
 }

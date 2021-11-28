@@ -13,15 +13,19 @@ type JsonResponse struct {
 }
 
 type MeasurementsResponse struct {
-	Oxigen      float64 `json:"oxigen_value"`
-	Temperature float64 `json:"temperature_value"`
-	Humidity    float64 `json:"humidity_value"`
-	Dioxide     float64 `json:"dioxide_value"`
+	OxigenMin      float64 `json:"oxigen_min_value"`
+	OxigenMax      float64 `json:"oxigen_max_value"`
+	TemperatureMin float64 `json:"temperature_min_value"`
+	TemperatureMax float64 `json:"temperature_max_value"`
+	HumidityMin    float64 `json:"humidity_min_value"`
+	HumidityMax    float64 `json:"humidity_max_value"`
+	DioxideMin     float64 `json:"dioxide_min_value"`
+	DioxideMax     float64 `json:"dioxide_max_value"`
 }
 
 func GetMeasurements(c *gin.Context) {
 	c.JSON(200, MeasurementsResponse{
-		Oxigen: 25.22,
+		OxigenMin: 25.22,
 	})
 }
 
@@ -37,10 +41,14 @@ func HandleVerification(c *gin.Context) {
 			return
 		}
 		c.JSON(http.StatusOK, gin.H{
-			"oxigen_value":      measurements.Oxigen,
-			"temperature_value": measurements.Temperature,
-			"humidity_value":    measurements.Humidity,
-			"dioxide_value":     measurements.Dioxide,
+			"oxigen_min_value":      measurements.OxigenMin,
+			"oxigen_max_value":      measurements.OxigenMax,
+			"temperature_min_value": measurements.TemperatureMin,
+			"temperature_max_value": measurements.TemperatureMax,
+			"humidity_min_value":    measurements.HumidityMin,
+			"humidity_max_value":    measurements.HumidityMax,
+			"dioxide_min_value":     measurements.DioxideMin,
+			"dioxide_max_value":     measurements.DioxideMax,
 		})
 		fmt.Println("Parameters are sended!!!")
 	}
