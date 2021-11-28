@@ -3,6 +3,7 @@ package controllers
 import (
 	"fmt"
 	"net/http"
+	"time"
 
 	"github.com/Arturo0911/measurements-realtime/connection"
 	"github.com/Arturo0911/measurements-realtime/models"
@@ -20,19 +21,22 @@ type LevelsRepo struct {
 }
 
 type MeasurementsResponse struct {
-	OxigenMin      float64 `json:"oxigen_min_value"`
-	OxigenMax      float64 `json:"oxigen_max_value"`
-	TemperatureMin float64 `json:"temperature_min_value"`
-	TemperatureMax float64 `json:"temperature_max_value"`
-	HumidityMin    float64 `json:"humidity_min_value"`
-	HumidityMax    float64 `json:"humidity_max_value"`
-	DioxideMin     float64 `json:"dioxide_min_value"`
-	DioxideMax     float64 `json:"dioxide_max_value"`
+	IdLevels       int64     `json:"id_niveles"`
+	IdReaders      int64     `json:"id_lecturaN"`
+	DateWrite      time.Time `json:"fecha_lectura"`
+	OxigenMin      float64   `json:"oxigen_min_value"`
+	OxigenMax      float64   `json:"oxigen_max_value"`
+	TemperatureMin float64   `json:"temperature_min_value"`
+	TemperatureMax float64   `json:"temperature_max_value"`
+	HumidityMin    float64   `json:"humidity_min_value"`
+	HumidityMax    float64   `json:"humidity_max_value"`
+	DioxideMin     float64   `json:"dioxide_min_value"`
+	DioxideMax     float64   `json:"dioxide_max_value"`
 }
 
 func New() *LevelsRepo {
 	db := connection.NewInstance()
-	db.AutoMigrate(&models.Levels{})
+	db.AutoMigrate(&models.Niveles{})
 	return &LevelsRepo{
 		Db: db,
 	}
@@ -45,8 +49,8 @@ func New() *LevelsRepo {
 // }
 
 func (repository *LevelsRepo) GetMeasurements(c *gin.Context) {
-	var levels []models.Levels
-	err := models.GetLevels(repository.Db, &levels)
+	var niveles []models.Niveles
+	err := models.GetLevels(repository.Db, &niveles)
 	if err != nil {
 		c.AbortWithStatusJSON(http.StatusInternalServerError,
 			gin.H{
@@ -54,7 +58,8 @@ func (repository *LevelsRepo) GetMeasurements(c *gin.Context) {
 			})
 		return
 	}
-	c.JSON(http.StatusOK, levels)
+	fmt.Println(niveles)
+	c.JSON(http.StatusOK, niveles)
 }
 
 func HandleVerification(c *gin.Context) {

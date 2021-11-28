@@ -6,31 +6,31 @@ import (
 	"gorm.io/gorm"
 )
 
-type Levels struct {
+type Niveles struct {
 	gorm.Model
-	IdLevels       int64     `json:"id_levels"`
-	IdReaders      int64     `json:"id_readers"`
-	DataWrite      time.Time `json:"data_write"`
-	OxigenMin      float64   `json:"oxigen_min_value"`
-	OxigenMax      float64   `json:"oxigen_max_value"`
-	TemperatureMin float64   `json:"temperature_min_value"`
-	TemperatureMax float64   `json:"temperature_max_value"`
-	HumidityMin    float64   `json:"humidity_min_value"`
-	HumidityMax    float64   `json:"humidity_max_value"`
-	DioxideMin     float64   `json:"dioxide_min_value"`
-	DioxideMax     float64   `json:"dioxide_max_value"`
+	IdLevels       int64     `json:"id_niveles"`
+	IdReaders      int64     `json:"id_lecturaN"`
+	DateWrite      time.Time `json:"fecha_lectura"`
+	OxigenMin      float64   `json:"uvMin"`
+	OxigenMax      float64   `json:"uvMax"`
+	TemperatureMin float64   `json:"temperaturaMin"`
+	TemperatureMax float64   `json:"temperaturaMax"`
+	HumidityMin    float64   `json:"humedadMin"`
+	HumidityMax    float64   `json:"humedadMax"`
+	DioxideMin     float64   `json:"co2Min"`
+	DioxideMax     float64   `json:"co2Max"`
 }
 
-func CreateLevel(db *gorm.DB, levels *Levels) (err error) {
-	err = db.Create(levels).Error
+func CreateLevel(db *gorm.DB, niveles *Niveles) (err error) {
+	err = db.Create(niveles).Error
 	if err != nil {
 		return err
 	}
 	return nil
 }
 
-func GetLevels(db *gorm.DB, levels *[]Levels) (err error) {
-	err = db.Find(levels).Error
+func GetLevels(db *gorm.DB, niveles *[]Niveles) (err error) {
+	err = db.Find(niveles).Error
 	if err != nil {
 		return err
 	}
