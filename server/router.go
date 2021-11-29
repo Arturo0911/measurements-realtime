@@ -10,7 +10,7 @@ func Router(router *gin.Engine) *gin.Engine {
 
 	levelsRepo := controllers.New()
 	router.Group("/realtime").
-		GET("/get-measures", levelsRepo.GetMeasurements).
+		GET("/get-measures", levelsRepo.GetReading).
 		//GET("get-measure", GetMeasurement).
 		POST("post-measure", HandleVerification)
 		// possible POST method to send Mysql

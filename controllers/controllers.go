@@ -37,6 +37,7 @@ type MeasurementsResponse struct {
 func New() *ReadingRepo {
 	db := connection.NewInstance()
 	db.AutoMigrate(&models.ReadingValues{})
+	db.AutoMigrate(&models.LevelsValues{})
 	return &ReadingRepo{
 		Db: db,
 	}
@@ -48,9 +49,9 @@ func GetMeasurements(c *gin.Context) {
 	})
 }
 
-func (repository *ReadingRepo) GetMeasurements(c *gin.Context) {
+func (repository *ReadingRepo) GetReading(c *gin.Context) {
 	var reading []models.ReadingValues
-	err := models.GetLevels(repository.Db, &reading)
+	err := models.GetReadingValues(repository.Db, &reading)
 	if err != nil {
 		c.AbortWithStatusJSON(http.StatusInternalServerError,
 			gin.H{
@@ -58,7 +59,6 @@ func (repository *ReadingRepo) GetMeasurements(c *gin.Context) {
 			})
 		return
 	}
-	fmt.Println(reading)
 	c.JSON(http.StatusOK, reading)
 }
 

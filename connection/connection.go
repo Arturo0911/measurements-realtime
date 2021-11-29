@@ -17,7 +17,7 @@ func NewInstance() *gorm.DB {
 
 func GetConnection() *gorm.DB {
 	db, err := gorm.Open(
-		mysql.Open(DB_USERNAME+":"+DB_PASSWORD+"@tcp(127.0.0.1:3306)/GreenHouse?parseTime=true&loc=Local"),
+		mysql.Open(DB_USERNAME+":"+DB_PASSWORD+"@tcp(127.0.0.1:3306)/GreenHouseRealTime?parseTime=true&loc=Local"),
 		&gorm.Config{})
 	if err != nil {
 		log.Fatalf("Error by: %s", err)
