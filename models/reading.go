@@ -7,7 +7,7 @@ import (
 )
 
 type ReadingValues struct {
-	gorm.Model
+	//gorm.Model
 	Id          int64     `json:"id"`
 	DateReading time.Time `json:"date_reading"`
 	Temperature float64   `json:"temperature"`

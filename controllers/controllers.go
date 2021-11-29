@@ -1,6 +1,7 @@
 package controllers
 
 import (
+	"fmt"
 	"net/http"
 	"time"
 
@@ -50,7 +51,8 @@ func GetMeasurements(c *gin.Context) {
 
 func (repository *StructRepo) PostReading(c *gin.Context) {
 	var reading models.ReadingValues
-	c.BindJSON(&reading)
+	c.ShouldBindJSON(&reading)
+	//reading.DateReading = time.Now().Truncate()
 	err := models.CreateReading(repository.Db, &reading)
 	if err != nil {
 		c.AbortWithStatusJSON(http.StatusInternalServerError,
@@ -59,6 +61,7 @@ func (repository *StructRepo) PostReading(c *gin.Context) {
 			})
 		return
 	}
+	fmt.Println(&reading)
 	c.JSON(http.StatusOK, reading)
 }
 
