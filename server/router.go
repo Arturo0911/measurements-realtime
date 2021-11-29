@@ -8,12 +8,12 @@ import (
 
 func Router(router *gin.Engine) *gin.Engine {
 
-	levelsRepo := controllers.New()
+	repoLayer := controllers.New()
 	router.Group("/realtime").
-		GET("/get-measures", levelsRepo.GetReading).
-		//GET("get-measure", GetMeasurement).
-		POST("post-measure", HandleVerification)
-		// possible POST method to send Mysql
+		GET("/get-reading", repoLayer.GetReading).
+		POST("/post-reading", repoLayer.PostReading).
+		GET("/get-levels", repoLayer.GetLevels).
+		POST("/post-levels", repoLayer.PostLevels)
 
 	router.Use(func(c *gin.Context) {
 		c.JSON(404, JsonResponse{

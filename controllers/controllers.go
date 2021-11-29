@@ -16,7 +16,7 @@ type JsonResponse struct {
 	Error   string
 }
 
-type ReadingRepo struct {
+type StructRepo struct {
 	Db *gorm.DB
 }
 
@@ -34,11 +34,11 @@ type MeasurementsResponse struct {
 	DioxideMax     float64   `json:"dioxide_max_value"`
 }
 
-func New() *ReadingRepo {
+func New() *StructRepo {
 	db := connection.NewInstance()
 	db.AutoMigrate(&models.ReadingValues{})
 	db.AutoMigrate(&models.LevelsValues{})
-	return &ReadingRepo{
+	return &StructRepo{
 		Db: db,
 	}
 }
@@ -49,7 +49,11 @@ func GetMeasurements(c *gin.Context) {
 	})
 }
 
-func (repository *ReadingRepo) GetReading(c *gin.Context) {
+func (repository *StructRepo) PostReading(c *gin.Context) {
+
+}
+
+func (repository *StructRepo) GetReading(c *gin.Context) {
 	var reading []models.ReadingValues
 	err := models.GetReadingValues(repository.Db, &reading)
 	if err != nil {
@@ -60,6 +64,23 @@ func (repository *ReadingRepo) GetReading(c *gin.Context) {
 		return
 	}
 	c.JSON(http.StatusOK, reading)
+}
+
+func (repository *StructRepo) PostLevels(c *gin.Context) {
+
+}
+
+func (respository *StructRepo) GetLevels(c *gin.Context) {
+	var levels []models.LevelsValues
+	err := models.GetLevelsValues(respository.Db, &levels)
+	if err != nil {
+		c.AbortWithStatusJSON(http.StatusInternalServerError,
+			gin.H{
+				"error": err,
+			})
+		return
+	}
+	c.JSON(http.StatusOK, levels)
 }
 
 func HandleVerification(c *gin.Context) {
