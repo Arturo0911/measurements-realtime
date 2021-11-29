@@ -1,7 +1,6 @@
 package controllers
 
 import (
-	"fmt"
 	"net/http"
 	"time"
 
@@ -50,7 +49,17 @@ func GetMeasurements(c *gin.Context) {
 }
 
 func (repository *StructRepo) PostReading(c *gin.Context) {
-
+	var reading models.ReadingValues
+	c.BindJSON(&reading)
+	err := models.CreateReading(repository.Db, &reading)
+	if err != nil {
+		c.AbortWithStatusJSON(http.StatusInternalServerError,
+			gin.H{
+				"error": err,
+			})
+		return
+	}
+	c.JSON(http.StatusOK, reading)
 }
 
 func (repository *StructRepo) GetReading(c *gin.Context) {
@@ -67,7 +76,17 @@ func (repository *StructRepo) GetReading(c *gin.Context) {
 }
 
 func (repository *StructRepo) PostLevels(c *gin.Context) {
-
+	var levels models.LevelsValues
+	c.BindJSON(&levels)
+	err := models.CreateLevels(repository.Db, &levels)
+	if err != nil {
+		c.AbortWithStatusJSON(http.StatusInternalServerError,
+			gin.H{
+				"error": err,
+			})
+		return
+	}
+	c.JSON(http.StatusOK, levels)
 }
 
 func (respository *StructRepo) GetLevels(c *gin.Context) {
@@ -83,23 +102,23 @@ func (respository *StructRepo) GetLevels(c *gin.Context) {
 	c.JSON(http.StatusOK, levels)
 }
 
-func HandleVerification(c *gin.Context) {
+// func HandleVerification(c *gin.Context) {
 
-	if c.Request.Method == "POST" {
-		var measurements MeasurementsResponse
-		if err := c.BindJSON(&measurements); err != nil {
-			return
-		}
-		c.JSON(http.StatusOK, gin.H{
-			"oxigen_min_value":      measurements.OxigenMin,
-			"oxigen_max_value":      measurements.OxigenMax,
-			"temperature_min_value": measurements.TemperatureMin,
-			"temperature_max_value": measurements.TemperatureMax,
-			"humidity_min_value":    measurements.HumidityMin,
-			"humidity_max_value":    measurements.HumidityMax,
-			"dioxide_min_value":     measurements.DioxideMin,
-			"dioxide_max_value":     measurements.DioxideMax,
-		})
-		fmt.Println("Parameters are sended!!!")
-	}
-}
+// 	if c.Request.Method == "POST" {
+// 		var measurements MeasurementsResponse
+// 		if err := c.BindJSON(&measurements); err != nil {
+// 			return
+// 		}
+// 		c.JSON(http.StatusOK, gin.H{
+// 			"oxigen_min_value":      measurements.OxigenMin,
+// 			"oxigen_max_value":      measurements.OxigenMax,
+// 			"temperature_min_value": measurements.TemperatureMin,
+// 			"temperature_max_value": measurements.TemperatureMax,
+// 			"humidity_min_value":    measurements.HumidityMin,
+// 			"humidity_max_value":    measurements.HumidityMax,
+// 			"dioxide_min_value":     measurements.DioxideMin,
+// 			"dioxide_max_value":     measurements.DioxideMax,
+// 		})
+// 		fmt.Println("Parameters are sended!!!")
+// 	}
+// }
