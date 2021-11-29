@@ -3,6 +3,7 @@ package controllers
 import (
 	"fmt"
 	"net/http"
+	"time"
 
 	"github.com/Arturo0911/measurements-realtime/connection"
 	"github.com/Arturo0911/measurements-realtime/models"
@@ -15,47 +16,41 @@ type JsonResponse struct {
 	Error   string
 }
 
-type LevelsRepo struct {
+type ReadingRepo struct {
 	Db *gorm.DB
 }
 
-type ReadingValues struct {
-
+type MeasurementsResponse struct {
+	IdLevels       int64     `json:"id_niveles"`
+	IdReaders      int64     `json:"id_lecturaN"`
+	DateWrite      time.Time `json:"fecha_lectura"`
+	OxigenMin      float64   `json:"oxigen_min_value"`
+	OxigenMax      float64   `json:"oxigen_max_value"`
+	TemperatureMin float64   `json:"temperature_min_value"`
+	TemperatureMax float64   `json:"temperature_max_value"`
+	HumidityMin    float64   `json:"humidity_min_value"`
+	HumidityMax    float64   `json:"humidity_max_value"`
+	DioxideMin     float64   `json:"dioxide_min_value"`
+	DioxideMax     float64   `json:"dioxide_max_value"`
 }
 
-type 
-
-// type MeasurementsResponse struct {
-// 	IdLevels       int64     `json:"id_niveles"`
-// 	IdReaders      int64     `json:"id_lecturaN"`
-// 	DateWrite      time.Time `json:"fecha_lectura"`
-// 	OxigenMin      float64   `json:"oxigen_min_value"`
-// 	OxigenMax      float64   `json:"oxigen_max_value"`
-// 	TemperatureMin float64   `json:"temperature_min_value"`
-// 	TemperatureMax float64   `json:"temperature_max_value"`
-// 	HumidityMin    float64   `json:"humidity_min_value"`
-// 	HumidityMax    float64   `json:"humidity_max_value"`
-// 	DioxideMin     float64   `json:"dioxide_min_value"`
-// 	DioxideMax     float64   `json:"dioxide_max_value"`
-// }
-
-func New() *LevelsRepo {
+func New() *ReadingRepo {
 	db := connection.NewInstance()
-	db.AutoMigrate(&models.Niveles{})
-	return &LevelsRepo{
+	db.AutoMigrate(&models.ReadingValues{})
+	return &ReadingRepo{
 		Db: db,
 	}
 }
 
-// func GetMeasurements(c *gin.Context) {
-// 	c.JSON(200, MeasurementsResponse{
-// 		OxigenMin: 25.22,
-// 	})
-// }
+func GetMeasurements(c *gin.Context) {
+	c.JSON(200, MeasurementsResponse{
+		OxigenMin: 25.22,
+	})
+}
 
-func (repository *LevelsRepo) GetMeasurements(c *gin.Context) {
-	var niveles []models.Niveles
-	err := models.GetLevels(repository.Db, &niveles)
+func (repository *ReadingRepo) GetMeasurements(c *gin.Context) {
+	var reading []models.ReadingValues
+	err := models.GetLevels(repository.Db, &reading)
 	if err != nil {
 		c.AbortWithStatusJSON(http.StatusInternalServerError,
 			gin.H{
@@ -63,8 +58,8 @@ func (repository *LevelsRepo) GetMeasurements(c *gin.Context) {
 			})
 		return
 	}
-	fmt.Println(niveles)
-	c.JSON(http.StatusOK, niveles)
+	fmt.Println(reading)
+	c.JSON(http.StatusOK, reading)
 }
 
 func HandleVerification(c *gin.Context) {
