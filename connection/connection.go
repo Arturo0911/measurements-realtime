@@ -25,7 +25,7 @@ func GetConnection() *gorm.DB {
 	HOST := os.Getenv("DB_HOST")
 	DBNAME := os.Getenv("DB_NAME")
 
-	URL := fmt.Sprintf("%s:%s@tcp(%s)/%s?charset=utf8&parseTime=True&loc=Local", USER, PASSWORD,
+	URL := fmt.Sprintf("%s:%s@tcp(%s:3306)/%s?charset=utf8&parseTime=True&loc=Local", USER, PASSWORD,
 		HOST, DBNAME)
 
 	db, err := gorm.Open(
