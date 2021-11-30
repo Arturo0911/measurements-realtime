@@ -1,13 +1,27 @@
-FROM golang:1.17.2 as go_builder
+FROM golang:1.17.2
 
-WORKDIR $GOPATH/src/github.com/Arturo0911/measurements-realtime
+RUN mkdir /app
 
-COPY . .
+# WORKDIR $GOPATH/src/github.com/Arturo0911/measurements-realtime
 
-RUN go get -t -d ./...
+WORKDIR /app
 
-RUN go install ./...
+ADD go.mod .
+
+ADD go.sum .
+
+RUN go mod download
+
+RUN go get github.com/Arturo0911/measurements-realtime
+
+ADD . .
+
+# RUN go get -t -d ./...
+
+# RUN go install ./...
 
 EXPOSE 8000
 
-CMD ["measurements-realtime"]
+ENTRYPOINT measurements-realtime --build="go build main.go" --command=./main
+
+# CMD ["measurements-realtime"]
