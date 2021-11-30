@@ -8,8 +8,8 @@ import (
 	"gorm.io/driver/mysql"
 )
 
-const DB_USERNAME = "root_payload"
-const DB_PASSWORD = ""
+const DB_USERNAME = "root"
+const DB_PASSWORD = "root"
 
 func NewInstance() *gorm.DB {
 	return GetConnection()
