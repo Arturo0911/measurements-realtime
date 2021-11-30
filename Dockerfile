@@ -2,19 +2,27 @@ FROM golang:1.17.2
 
 RUN mkdir /app
 
-# WORKDIR $GOPATH/src/github.com/Arturo0911/measurements-realtime
+WORKDIR $GOPATH/src/github.com/Arturo0911/measurements-realtime
 
-WORKDIR /app
+COPY . .
 
-ADD go.mod .
+RUN go get -d -v ./...
 
-ADD go.sum .
+RUN go install -v ./...
 
-RUN go mod download
+# WORKDIR /app
 
-RUN go get github.com/Arturo0911/measurements-realtime
+# ADD go.mod .
 
-ADD . .
+# ADD go.sum .
+
+# RUN go mod download
+
+# RUN go get github.com/Arturo0911/measurements-realtime
+
+# RUN go get github.com/Arturo0911/measurements-realtime
+
+# ADD . .
 
 # RUN go get -t -d ./...
 
@@ -22,6 +30,6 @@ ADD . .
 
 EXPOSE 8000
 
-ENTRYPOINT measurements-realtime --build="go build main.go" --command=./main
+# ENTRYPOINT measurements-realtime --build="go build main.go" --command=./main
 
-# CMD ["measurements-realtime"]
+CMD ["measurements-realtime"]
