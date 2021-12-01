@@ -2,6 +2,7 @@ version: '3.7'
 services:
   db:
     image: mysql/mysql-server:latest
+    container_name: godockerDB
     ports:
       - "3305:3306"
     networks:
