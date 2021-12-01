@@ -25,6 +25,12 @@ services:
       - db
     links:
       - "db:database"
+  frontend:
+    build: ./client
+    depends_on:
+      - web
+    ports:
+      - 80:80
 
 networks:
   default:
