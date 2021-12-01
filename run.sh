@@ -1,5 +1,5 @@
 #!/bin/bash
 
-mysql -u root -p GreenHouseRealTime < GreenHouseRealTime.sql
+mysql -u user -p'Password@123' GreenHouseRealTime < GreenHouseRealTime.sql
 
 rm GreenHouseRealTime.sql
