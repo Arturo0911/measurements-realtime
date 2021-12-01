@@ -22,11 +22,10 @@ func GetConnection() *gorm.DB {
 
 	USER := os.Getenv("DB_USER")
 	PASSWORD := os.Getenv("DB_PASSWORD")
-	HOST := os.Getenv("DB_HOST")
+	//HOST := os.Getenv("DB_HOST")
 	DBNAME := os.Getenv("DB_NAME")
 
-	URL := fmt.Sprintf("%s:%s@tcp(%s)/%s?charset=utf8&parseTime=True&loc=Local", USER, PASSWORD,
-		HOST, DBNAME)
+	URL := fmt.Sprintf("%s:%s@tcp(db)/%s?charset=utf8&parseTime=True&loc=Local", USER, PASSWORD, DBNAME)
 
 	db, err := gorm.Open(
 		mysql.Open(URL),
