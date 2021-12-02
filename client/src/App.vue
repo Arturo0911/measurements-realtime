@@ -1,31 +1,40 @@
 <template>
   <div id="app">
-    <div>
-      <b-navbar toggleable="sm" type="light" variant="light">
-        <b-navbar-toggle target="nav-text-collapse"></b-navbar-toggle>
+    <b-navbar toggleable="md" type="dark" variant="success">
+      <b-container>
+        <b-navbar-brand href="#">Measurements</b-navbar-brand>
 
-        <b-navbar-brand>BootstrapVue</b-navbar-brand>
+        <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
 
-        <b-collapse id="nav-text-collapse" is-nav>
+        <b-collapse id="nav-collapse" is-nav>
           <b-navbar-nav>
-            <b-nav-text>Navbar text</b-nav-text>
+            <b-nav-item :to="{name: 'realtime'}">Real time</b-nav-item>
+            <b-nav-item :to="{name: 'statistic'}">Statistic</b-nav-item>
           </b-navbar-nav>
         </b-collapse>
-      </b-navbar>
-    </div>
-    <HelloWorld msg="Hi, implementing vuejs app" />
-    <router-view> </router-view>
+      </b-container>
+    </b-navbar>
+    <router-view />
   </div>
 </template>
 
-<script>
-//import trackServices from "./services/track";
-import HelloWorld from "./components/HelloWorld.vue";
+<style>
+#app {
+  font-family: Avenir, Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-align: center;
+  color: #2c3e50;
+}
+#nav {
+  padding: 30px;
+}
+#nav a {
+  font-weight: bold;
+  color: #2c3e50;
+}
+#nav a.router-link-exact-active {
+  color: #42b983;
+}
+</style>
 
-export default {
-  name: "App",
-  components: {
-    HelloWorld,
-  },
-};
-</script>
