@@ -26,6 +26,7 @@ func GetConnection() *gorm.DB {
 	DBNAME := os.Getenv("DB_NAME")
 
 	URL := fmt.Sprintf("%s:%s@tcp(godockerDB)/%s?charset=utf8&parseTime=True&loc=Local", USER, PASSWORD, DBNAME)
+	//URL := fmt.Sprintf("root_payload:@tcp(127.0.0.1:3306)/GreenHouseRealTime?charset=utf8&parseTime=True&loc=Local")
 
 	db, err := gorm.Open(
 		mysql.Open(URL),
