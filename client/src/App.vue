@@ -8,7 +8,7 @@
 
         <b-collapse id="nav-collapse" is-nav>
           <b-navbar-nav>
-            <b-nav-item :to="{name: 'realtime'}">Real time</b-nav-item>
+            <!-- <b-nav-item :to="{name: 'realtime'}">Real time</b-nav-item> -->
             <b-nav-item :to="{name: 'statistic'}">Statistic</b-nav-item>
             <b-nav-item :to="{name: 'charts'}">Charts</b-nav-item>
           </b-navbar-nav>

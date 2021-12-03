@@ -14,7 +14,7 @@ fetch("http://localhost:8000/realtime/get-reading")
       temperatureVals.push(element.temperature);
       dioxideVals.push(element.dioxide);
       radiationVals.push(element.radiation);
-      datesVals.push(element.date_reading);
+      datesVals.push(element.id);
     });
   });
 
@@ -40,14 +40,14 @@ export const MeasurementsChartData = {
       {
         label: "Dioxide",
         data: dioxideVals,
-        backgroundColor: "rgba(71, 183,132,.5)",
+        backgroundColor: "rgba(153, 20, 60, 0.8)",
         borderColor: "#47b784",
         borderWidth: 3,
       },
       {
         label: "Radiation",
         data: radiationVals,
-        backgroundColor: "rgba(71, 183,132,.5)",
+        backgroundColor: "rgba(20, 102, 153, 0.8)",
         borderColor: "#47b784",
         borderWidth: 3,
       },
