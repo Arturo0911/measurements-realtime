@@ -18,7 +18,17 @@ export default{
     },
     mounted(){
         const ctx = document.getElementById('measurements-chart');
-        new Chart(ctx, this.MeasurementsChartData)
-    } 
+        new Chart(ctx, this.MeasurementsChartData);
+    },
+    created(){
+      this.loadData();
+    },
+    methods:{
+      loadData(){
+        //console.log("working!!");
+        setTimeout(this.loadData, 100);
+      },
+      
+    }
 }
 </script>

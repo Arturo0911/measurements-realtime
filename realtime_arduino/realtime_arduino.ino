@@ -21,6 +21,9 @@ void loop() {
   saliny = (humidity - x) *y;
   z = map(saliny, 0, 1023, 100, 0);
   delay(1000);
-  Serial.println(z);
+  Serial.println(35);
+  Serial.println(72);
+  Serial.println(300);
+  Serial.println(1.1);
 
 }

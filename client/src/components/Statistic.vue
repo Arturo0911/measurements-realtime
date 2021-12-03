@@ -44,7 +44,7 @@ export default {
   },
   created() {
     this.loadStatistics();
-    console.log(this.humidityVals);
+    //console.log(this.humidityVals);
   },
   methods: {
     loadStatistics() {
@@ -53,7 +53,7 @@ export default {
         .then((data) => {
           this.statisticsVals = data;
           this.statisticsVals.forEach(element => {
-            console.log(element.humidity);
+            //console.log(element.humidity);
             this.humidityVals.push(element.humidity);
             this.temperatureVals.push(element.temperature);
             this.dioxideVals.push(element.dioxide);
@@ -61,6 +61,8 @@ export default {
             this.datesVals.push(element.date_reading);
           });
         });
+      setTimeout(this.loadStatistics, 100);
+
     },
   },
 };
