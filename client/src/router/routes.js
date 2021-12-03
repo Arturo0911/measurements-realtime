@@ -14,6 +14,11 @@ const routes = [
         path: '/statistics',
         component:()=> import(/* webpackChunkName: "about" */ '../components/Statistic.vue'),
         name:"statistic"
+    },
+    {
+        path: '/charts',
+        component:()=> import(/* webpackChunkName: "about" */ '../components/DataChart.vue'),
+        name:"charts"
     }
 ]
 
