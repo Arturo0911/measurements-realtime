@@ -1,6 +1,6 @@
 <template>
   <div>
-    <PlanetChart/>
+    <PlanetChart />
   </div>
 </template>
 
@@ -9,7 +9,7 @@
 import PlanetChart from './PlanetChart.vue'
 export default {
   name: "Realtime",
-  components:{
+  components: {
     PlanetChart
   }
 };

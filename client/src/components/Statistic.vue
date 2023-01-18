@@ -5,20 +5,19 @@
         <thead>
           <tr>
             <th scope="col">Date</th>
-            <th scope="col">Temperature</th>
+            <!-- <th scope="col">Temperature</th>
             <th scope="col">Humidity</th>
             <th scope="col">Dioxide</th>
-            <th scope="col">Radiation</th>
-            <th scope="col">Radiation</th>
+            <th scope="col">Radiation</th> -->
+            <th scope="col">pH</th>
           </tr>
         </thead>
         <tbody v-bind:key="stat.id" v-for="stat in statisticsVals">
           <tr>
             <td>{{ stat.date_reading }}</td>
-            <td>{{ stat.temperature }}</td>
-            <td>{{ stat.humidity }}</td>
-            <td>{{ stat.dioxide }}</td>
-            <td>{{ stat.radiation }}</td>
+            <!-- <td>{{ stat.temperature }}</td>
+            <td>{{ stat.humidity }}</td> -->
+            <td>{{ stat.ph }}</td>
           </tr>
         </tbody>
       </table>
