@@ -21,10 +21,6 @@ services:
       - "8000:8000"
     volumes:
       - ".:/app"
-    depends_on:
-      - db
-    links:
-      - "db:database"
     network_mode: "host"
   frontend:
     build: ./client
