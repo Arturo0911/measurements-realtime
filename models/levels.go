@@ -10,7 +10,7 @@ import (
 type LevelsValues struct {
 	//gorm.Model
 	Id          int64     `json:"id"`
-	DateReading time.Time `gorm:"column:date_reading"`
+	DateReading time.Time `gorm:"type:timestamp;default:current_timestamp" json:"date_reading"`
 	PH          float64   `json:"ph_value"`
 }
 
