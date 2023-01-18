@@ -4,14 +4,17 @@
       <table class="table table-striped">
         <thead>
           <tr>
+            <th scope="col">Date</th>
             <th scope="col">Temperature</th>
             <th scope="col">Humidity</th>
             <th scope="col">Dioxide</th>
+            <th scope="col">Radiation</th>
             <th scope="col">Radiation</th>
           </tr>
         </thead>
         <tbody v-bind:key="stat.id" v-for="stat in statisticsVals">
           <tr>
+            <td>{{ stat.date_reading }}</td>
             <td>{{ stat.temperature }}</td>
             <td>{{ stat.humidity }}</td>
             <td>{{ stat.dioxide }}</td>
@@ -38,8 +41,7 @@ export default {
           datesVals:[],
           humidityVals: [],
           temperatureVals:[],
-          dioxideVals:[],
-          radiationVals:[]
+          phVals:[]
       }
   },
   created() {
@@ -56,8 +58,7 @@ export default {
             //console.log(element.humidity);
             this.humidityVals.push(element.humidity);
             this.temperatureVals.push(element.temperature);
-            this.dioxideVals.push(element.dioxide);
-            this.radiationVals.push(element.radiation);
+            this.phVals.push(element.ph);
             this.datesVals.push(element.date_reading);
           });
         });

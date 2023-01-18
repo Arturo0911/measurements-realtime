@@ -12,8 +12,7 @@ type ReadingValues struct {
 	DateReading time.Time `json:"date_reading"`
 	Temperature float64   `json:"temperature"`
 	Humidity    float64   `json:"humidity"`
-	Dioxide     float64   `json:"dioxide"`
-	Radiation   float64   `json:"radiation"`
+	PH          float64   `json:"ph"`
 }
 
 func CreateReading(db *gorm.DB, reading *ReadingValues) (err error) {
