@@ -48,7 +48,7 @@ export default {
   },
   methods: {
     loadStatistics() {
-      fetch("http://localhost:8000/realtime/get-reading")
+      fetch("http://159.223.205.198:8000/realtime/get-reading")
         .then((res) => res.json())
         .then((data) => {
           this.statisticsVals = data;
