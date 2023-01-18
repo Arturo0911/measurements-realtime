@@ -9,7 +9,7 @@ import (
 type ReadingValues struct {
 	//gorm.Model
 	Id          int64     `json:"id"`
-	DateReading time.Time `gorm:"default:CURRENT_TIMESTAMP()"`
+	DateReading time.Time `gorm:"column:date_reading"`
 	Temperature float64   `json:"temperature"`
 	Humidity    float64   `json:"humidity"`
 	PH          float64   `json:"ph"`
