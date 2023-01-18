@@ -46,7 +46,7 @@ export const MeasurementsChartData = {
       // },
       {
         label: "ph values",
-        data: radiationVals,
+        data: phVals,
         backgroundColor: "rgba(20, 102, 153, 0.8)",
         borderColor: "#47b784",
         borderWidth: 3,
